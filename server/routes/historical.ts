@@ -1,7 +1,8 @@
 // server/routes/historical.ts
-import { Router, Request, Response } from 'express';
+import {Router, Request, Response, type Router as ExpressRouter} from 'express';
 
-export const historicalRouter = Router();
+export const historicalRouter: ExpressRouter = Router();
+
 
 /**
  * GET /api/historical/prices/:tokenAddress

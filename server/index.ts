@@ -1,5 +1,6 @@
 // server/index.ts
-import express, { Request, Response } from 'express';
+import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { analysisRouter } from './routes/analysis';
 import { historicalRouter } from './routes/historical';
 
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS - simple implementation without the cors package
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -50,7 +51,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Error handling
-app.use((err: Error, req: Request, res: Response, next: any) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error('Server error:', err);
     res.status(500).json({
         error: 'Internal server error',

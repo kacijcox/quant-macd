@@ -1,7 +1,8 @@
 // server/routes/analysis.ts
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 
-export const analysisRouter = Router();
+export const analysisRouter: ExpressRouter = Router();
 
 /**
  * POST /api/analysis/macd
