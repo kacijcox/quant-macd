@@ -1,0 +1,62 @@
+/* src/components/Metrics/MetricCard.styles.css */
+.metric-card {
+    background: rgba(0, 255, 0, 0.03);
+    border: 1px solid #0f0;
+    padding: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card:hover {
+    border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #0f0;
+    font-weight: bold;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.metric-value.positive {
+    color: #0f0;
+}
+
+.metric-value.negative {
+    color: #f00;
+}
+
+.metric-value.neutral {
+    color: #ff0;
+}
+
+.metric-delta {
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.metric-delta.positive {
+    color: #0f0;
+}
+
+.metric-delta.negative {
+    color: #f00;
+}
+
+.metric-delta.neutral {
+    color: #ff0;
+}

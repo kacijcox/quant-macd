@@ -73,16 +73,18 @@ export interface RiskMetrics {
 }
 
 export interface PerformanceMetrics {
-    totalReturn: number;
-    annualizedReturn: number;
-    winRate: number;
-    profitFactor: number;
-    avgWin: number;
-    avgLoss: number;
-    maxWin: number;
-    maxLoss: number;
-    calmarRatio: number;
-    signalsToday: number;
+  totalReturn: number;
+  annualizedReturn: number;
+  maxDrawdown: number;
+  sharpeRatio: number;
+  sortinoRatio: number;
+  volatility: number;
+  var95: number;
+  var99: number;
+  cvar95: number;
+  winRate: number;
+  profitFactor: number;
+  kellyCriterion: number;
 }
 
 export interface AnalysisMode {

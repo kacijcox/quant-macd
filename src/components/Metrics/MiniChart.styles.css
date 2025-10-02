@@ -1,0 +1,36 @@
+/* src/components/Metrics/MiniChart.styles.css */
+.mini-chart {
+    height: 40px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.chart-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1px;
+    position: relative;
+}
+
+.chart-bar {
+    flex: 1;
+    min-width: 2px;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.chart-bar:hover {
+    opacity: 1;
+}
+
+.chart-zero-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0, 255, 0, 0.3);
+    transform: translateY(-50%);
+}
