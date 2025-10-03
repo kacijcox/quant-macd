@@ -44,13 +44,18 @@ module.exports = (env, argv) => {
             fallback: {
                 crypto: require.resolve('crypto-browserify'),
                 stream: require.resolve('stream-browserify'),
-                buffer: require.resolve('buffer'),
+                buffer: require.resolve('buffer/'),
+                process: false,  // Change this - don't try to polyfill
+                http: require.resolve('stream-http'),
+                https: require.resolve('https-browserify'),
+                os: require.resolve('os-browserify/browser'),
+                url: require.resolve('url/'),
+                assert: require.resolve('assert/'),
             },
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: './public/index.html',
-                favicon: './public/favicon.ico',
             }),
             new webpack.ProvidePlugin({
                 Buffer: ['buffer', 'Buffer'],

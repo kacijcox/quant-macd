@@ -158,22 +158,30 @@ export class BacktestEngine {
         const profitFactor = avgLoss > 0 ? avgWin / avgLoss : 0;
 
         const maxDrawdown = this.calculateMaxDrawdown(equity);
-        const calmarRatio = maxDrawdown > 0 ? totalReturn / maxDrawdown : 0;
+        const calmarRatio = maxDrawdown > 0 ? totalReturn / maxDrawdown : 0;  // ADD THIS LINE
 
         const sharpeRatio = this.statsAnalyzer.calculateSharpeRatio(returns);
 
         return {
             totalReturn,
-            annualizedReturn: totalReturn * (252 / equity.length), // Rough annualization
+            annualizedReturn: totalReturn * (252 / equity.length),
+            maxDrawdown,
+            sharpeRatio,
+            sortinoRatio: this.statsAnalyzer.calculateSortinoRatio(returns),
+            volatility: this.statsAnalyzer['standardDeviation'](returns) * 100,
+            var95: this.statsAnalyzer.calculateVaR(returns, 0.95),
+            var99: this.statsAnalyzer.calculateVaR(returns, 0.99),
+            cvar95: this.statsAnalyzer.calculateCVaR(returns, 0.95),
             winRate,
             profitFactor,
+            kellyCriterion: this.statsAnalyzer.calculateKellyCriterion(winRate / 100, avgWin, avgLoss),
             avgWin,
             avgLoss,
             maxWin: winningTrades.length > 0 ?
                 Math.max(...winningTrades.map(t => t.pnlPercent || 0)) : 0,
             maxLoss: losingTrades.length > 0 ?
                 Math.abs(Math.min(...losingTrades.map(t => t.pnlPercent || 0))) : 0,
-            calmarRatio,
+            calmarRatio,  // Now this shorthand works
             signalsToday: closedTrades.length
         };
     }

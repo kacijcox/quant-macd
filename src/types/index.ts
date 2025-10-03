@@ -85,6 +85,12 @@ export interface PerformanceMetrics {
   winRate: number;
   profitFactor: number;
   kellyCriterion: number;
+    avgWin: number;        // Add this
+    avgLoss: number;       // Add this
+    maxWin: number;        // Add this
+    maxLoss: number;       // Add this
+    calmarRatio: number;   // Add this
+    signalsToday: number;  // Add this
 }
 
 export interface AnalysisMode {
