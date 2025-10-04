@@ -56,7 +56,7 @@ const Controls: React.FC<ControlsProps> = ({
                         onChange={(e) => setTimeframe(e.target.value)}
                         disabled={loading}
                     >
-                        {timeframes.map(tf => (
+                        {timeframes.map((tf) => (
                             <option key={tf} value={tf}>{tf.toUpperCase()}</option>
                         ))}
                     </select>
@@ -67,10 +67,10 @@ const Controls: React.FC<ControlsProps> = ({
                     <select
                         className="control-select"
                         value={mode}
-                        onChange={(e) => setMode(e.target.value as any)}
+                        onChange={(e) => setMode(e.target.value as 'STANDARD' | 'ADAPTIVE' | 'ML_ENHANCED')}
                         disabled={loading}
                     >
-                        {modes.map(m => (
+                        {modes.map((m) => (
                             <option key={m} value={m}>{m.replace('_', ' ')}</option>
                         ))}
                     </select>

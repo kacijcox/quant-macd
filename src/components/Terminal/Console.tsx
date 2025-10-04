@@ -1,3 +1,4 @@
+// src/components/Terminal/Console.tsx
 import React, { useEffect, useRef } from 'react';
 import './Console.styles.css';
 
@@ -32,8 +33,8 @@ const Console: React.FC<ConsoleProps> = ({ messages }) => {
                         <div key={index} className="console-line">
                             <span className="console-time">{time}]</span>
                             <span className={`console-message ${isError ? 'error' : isAlert ? 'alert' : ''}`}>
-                {msg}
-              </span>
+                                {msg}
+                            </span>
                         </div>
                     );
                 })

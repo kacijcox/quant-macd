@@ -1,10 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const Dashboard = () => {
-    const [tokenAddress, setTokenAddress] = useState('');
-    const [timeframe, setTimeframe] = useState('5m');
-    const [loading, setLoading] = useState(false);
+interface MetricCardProps {
+    label: string;
+    value: string;
+    change?: number;
+    positive?: boolean;
+    negative?: boolean;
+    subtitle?: string;
+}
+
+interface RiskMetricCardProps {
+    label: string;
+    value: string;
+}
+
+interface SignalCardProps {
+    timeframe: string;
+    signal: string;
+}
+
+// ADD THIS INTERFACE AND EXPORT IT
+export interface DashboardProps {
+    tokenAddress: string;
+    setTokenAddress: (address: string) => void;
+    timeframe: string;
+    setTimeframe: (tf: string) => void;
+    mode: 'STANDARD' | 'ADAPTIVE' | 'ML_ENHANCED';
+    setMode: (mode: 'STANDARD' | 'ADAPTIVE' | 'ML_ENHANCED') => void;
+    loading: boolean;
+    onExecute: () => void;
+    macdResult: any;
+    statistics: any;
+    regime: any;
+    timeframeSignals: any[];
+    consoleMessages: string[];
+}
+
+// CHANGE THIS LINE - accept props instead of empty ()
+const Dashboard: React.FC<DashboardProps> = ({
+                                                 tokenAddress,
+                                                 setTokenAddress,
+                                                 timeframe,
+                                                 setTimeframe,
+                                                 mode,
+                                                 setMode,
+                                                 loading,
+                                                 onExecute
+                                             }) => {
+    // REMOVE these lines since they come from props now
+    // const [tokenAddress, setTokenAddress] = useState('');
+    // const [timeframe, setTimeframe] = useState('5m');
+    // const [loading, setLoading] = useState(false);
+
     const [activeTab, setActiveTab] = useState('analysis');
 
     // Mock data for demonstration
@@ -132,8 +180,8 @@ const Dashboard = () => {
                                     fontFamily: "'Inter', sans-serif",
                                     transition: 'border-color 0.2s'
                                 }}
-                                onFocus={(e) => e.target.style.borderColor = '#C9A961'}
-                                onBlur={(e) => e.target.style.borderColor = '#ddd'}
+                                onFocus={(e) => (e.target as HTMLInputElement).style.borderColor = '#C9A961'}
+                                onBlur={(e) => (e.target as HTMLInputElement).style.borderColor = '#ddd'}
                             />
                         </div>
                         <div>
@@ -182,6 +230,8 @@ const Dashboard = () => {
                                 Mode
                             </label>
                             <select
+                                value={mode}
+                                onChange={(e) => setMode(e.target.value as any)}
                                 style={{
                                     padding: '0.75rem 1rem',
                                     border: '1px solid #ddd',
@@ -192,13 +242,13 @@ const Dashboard = () => {
                                     cursor: 'pointer'
                                 }}
                             >
-                                <option value="standard">Standard</option>
-                                <option value="adaptive">Adaptive</option>
-                                <option value="ml">ML Enhanced</option>
+                                <option value="STANDARD">Standard</option>
+                                <option value="ADAPTIVE">Adaptive</option>
+                                <option value="ML_ENHANCED">ML Enhanced</option>
                             </select>
                         </div>
                         <button
-                            onClick={() => setLoading(true)}
+                            onClick={onExecute}
                             disabled={!tokenAddress || loading}
                             style={{
                                 padding: '0.75rem 2rem',
@@ -216,12 +266,12 @@ const Dashboard = () => {
                             }}
                             onMouseOver={(e) => {
                                 if (tokenAddress && !loading) {
-                                    e.target.style.background = '#C9A961';
+                                    (e.target as HTMLButtonElement).style.background = '#C9A961';
                                 }
                             }}
                             onMouseOut={(e) => {
                                 if (tokenAddress && !loading) {
-                                    e.target.style.background = '#1a1a1a';
+                                    (e.target as HTMLButtonElement).style.background = '#1a1a1a';
                                 }
                             }}
                         >
@@ -411,7 +461,7 @@ const Dashboard = () => {
     );
 };
 
-const MetricCard = ({ label, value, change, positive, negative, subtitle }) => (
+const MetricCard: React.FC<MetricCardProps> = ({ label, value, change, positive, negative, subtitle }) => (
     <div style={{
         background: 'white',
         padding: '1.5rem',
@@ -460,7 +510,7 @@ const MetricCard = ({ label, value, change, positive, negative, subtitle }) => (
     </div>
 );
 
-const RiskMetricCard = ({ label, value }) => (
+const RiskMetricCard: React.FC<RiskMetricCardProps> = ({ label, value }) => (
     <div style={{
         padding: '1.5rem',
         borderLeft: '3px solid #C9A961',
@@ -487,7 +537,7 @@ const RiskMetricCard = ({ label, value }) => (
     </div>
 );
 
-const SignalCard = ({ timeframe, signal }) => (
+const SignalCard: React.FC<SignalCardProps> = ({ timeframe, signal }) => (
     <div style={{
         padding: '1rem',
         border: '1px solid #e0e0e0',

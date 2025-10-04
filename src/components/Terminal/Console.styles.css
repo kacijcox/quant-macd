@@ -1,0 +1,64 @@
+/* src/components/Terminal/Console.styles.css */
+.console {
+    background: rgba(0, 255, 0, 0.03);
+    border: 2px solid #0f0;
+    padding: 15px;
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'SF Mono', monospace;
+    font-size: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.console-line {
+    margin: 4px 0;
+    display: flex;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.console-time {
+    color: #006600;
+    flex-shrink: 0;
+}
+
+.console-message {
+    color: #0f0;
+    flex: 1;
+}
+
+.console-message.error {
+    color: #ff0000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.console-message.alert {
+    color: #ffff00;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+    font-weight: bold;
+}
+
+.console::-webkit-scrollbar {
+    width: 6px;
+}
+
+.console::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.console::-webkit-scrollbar-thumb {
+    background: #0f0;
+    border-radius: 3px;
+}
